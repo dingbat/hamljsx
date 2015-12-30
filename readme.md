@@ -10,7 +10,7 @@ return (~
     .section-box
       .section-btn
         {button}
-      %SomeOtherClass(schedule={this.state.store.schedule}
+      %SomeOtherClass(schedule={this.state.store.schedule})
 ~);
 ```
 
