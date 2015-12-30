@@ -28,4 +28,15 @@ class EngineTests < Test::Unit::TestCase
       ~);",
       "results = (<p className='hello'>hi</p>);"
   end
+
+  def test_dots
+    assert_render "
+      results = (~
+        .
+          .(key='hi')
+            .hi
+              hello
+      ~);",
+      "results = (<div><div key='hi'><div className='hi'>hello</div></div></div>);"
+  end
 end

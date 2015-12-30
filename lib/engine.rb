@@ -23,7 +23,7 @@ class HamlJsxEngine
         first_indent = haml.match(/\s*/)[0]
         haml.gsub!(/^#{first_indent}/,"")
 
-        haml.gsub!(/^.$/,"%div")
+        haml.gsub!(/^(\s*)\.(\(|$)/,'\1%div\2')
 
         html = Haml::Engine.new(haml).render
         html.gsub!("class=","className=")
