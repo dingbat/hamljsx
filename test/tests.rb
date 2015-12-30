@@ -22,11 +22,11 @@ class EngineTests < Test::Unit::TestCase
     assert_render "
       results = (~
         %p.hello
-          /* test */
+          /* test */a /* x */
           // test2
           hi
       ~);",
-      "results = (<p className='hello'>hi</p>);"
+      "results = (<p className='hello'>a\n  hi</p>);"
   end
 
   def test_dots

@@ -18,12 +18,21 @@ class HamlJsxEngine
         offset = idx_end + MARKER_END.length
 
         haml = data[(idx_start + MARKER_START.length)..(idx_end-1)]
+        
+        # Escape { } so they'll survive the HAML render
         haml.gsub!(/\{/,"'{")
         haml.gsub!(/\}/,"}'")
+
+        # Remove spaces offset
         first_indent = haml.match(/\s*/)[0]
         haml.gsub!(/^#{first_indent}/,"")
 
+        # Dot optimization
         haml.gsub!(/^(\s*)\.(\(|$)/,'\1%div\2')
+
+        # Remove comments
+        haml.gsub!(/^\s*\/\/.*$/,'')
+        haml.gsub!(/\/\*.*?\*\//,'')
 
         html = Haml::Engine.new(haml).render
         html.gsub!("class=","className=")
