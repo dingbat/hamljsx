@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name                      = 'hamljsx'
-  s.version                   = '0.1'
+  s.version                   = '0.1.1'
   s.summary                   = 'Use Haml with JSX!'
   s.description               = 'Inline Haml in JSX just like HTML, using (~ and ~) delimeters. Rather limited still.'
   s.authors                   = ['Dan Hassin']
