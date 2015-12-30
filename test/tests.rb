@@ -39,4 +39,9 @@ class EngineTests < Test::Unit::TestCase
       ~);",
       "results = (<div><div key='hi'><div className='hi'>hello</div></div></div>);"
   end
+
+  def test_class
+    assert_render "results = (~ %table(class='hi') ~);",
+                  "results = (<table className='hi'></table>);"
+  end
 end
