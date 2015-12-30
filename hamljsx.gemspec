@@ -8,5 +8,5 @@ Gem::Specification.new do |s|
   s.homepage                  = 'http://rubygems.org/gems/hamljsx'
   s.licenses                  = ['license.md']
 
-  s.files                     = ['lib/hamljsx.rb']
+  s.files                     = ['lib/hamljsx.rb', 'lib/engine.rb']
 end
