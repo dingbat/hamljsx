@@ -51,6 +51,16 @@ class EngineTests < Test::Unit::TestCase
           a
       ~);",
       "results = (<p className='hello'>{a1}{' '}{a2}{' '}a</p>);"
+
+    # Not supported for more flexibility (you may not want a space around your span)
+    # assert_render "
+    #   results = (~
+    #     .
+    #       {a1}
+    #       %span {a2}
+    #       {a3}
+    #   ~);",
+    #   "results = (<div>{a1}{' '}<span>{a2}</span>{' '}{a3}</div>)"
   end
 
   def test_comments

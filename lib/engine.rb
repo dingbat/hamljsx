@@ -44,7 +44,11 @@ class HamlJsxEngine
         html.gsub!(/\'\{/,"{")
         html.gsub!(/\}\'/,"}")
 
+        # Make JSX spacing consistent with Rails/Haml spacing
         html.gsub!(/([^>] *)\n(\s*[^< ])/,'\1{\' \'}\2')
+
+        # For adding spaces before spans, divs, etc. Not supported for more flexibility
+        # html.gsub!(/([^>] *)\n((?!(\s*<\/)))/,'\1{\' \'}\2')
 
         # p html
 
