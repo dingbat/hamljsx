@@ -18,7 +18,7 @@ class HamlJsxEngine
         offset = idx_end + MARKER_END.length
 
         haml = data[(idx_start + MARKER_START.length)..(idx_end-1)]
-        
+
         # Escape { } so they'll survive the HAML render
         haml.gsub!(/\{/,"'{")
         haml.gsub!(/\}/,"}'")
@@ -34,10 +34,19 @@ class HamlJsxEngine
         haml.gsub!(/^\s*\/\/.*$/,'')
         haml.gsub!(/\/\*.*?\*\//,'')
 
+        # p haml
+
         html = Haml::Engine.new(haml).render
         html.gsub!("class=","className=")
-        html.gsub!(/\'{/,"{")
+
+        # p html
+
+        html.gsub!(/\'\{/,"{")
         html.gsub!(/\}\'/,"}")
+
+        html.gsub!(/([^>] *)\n(\s*[^< ])/,'\1{\' \'}\2')
+
+        # p html
 
         result += html
       else

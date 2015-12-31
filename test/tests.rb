@@ -2,21 +2,56 @@ require 'test/unit'
 require_relative '../lib/engine'
 
 class EngineTests < Test::Unit::TestCase
-  def assert_render(haml, jsx)
-    whitespaced = HamlJsxEngine.evaluate(haml).gsub(/(>)\s*|\s*(<)/) do
+  def assert_render(haml, jsx, strip_white=true)
+    rendered = HamlJsxEngine.evaluate(haml)
+    rendered.gsub!(/(>|})\s*|\s*({|<)/) do
       "#{$1}#{$2}"
-    end
-    assert_equal jsx.strip, whitespaced.strip
+    end if strip_white
+    assert_equal jsx.strip, rendered.strip
   end
 
   def test_basic
     assert_render "
       results = (~
         %p.hello
-          hi
+          {hi}
       ~);",
-      "results = (<p className='hello'>hi</p>);"
+      "results = (<p className='hello'>{hi}</p>);"
+
+    assert_render "
+      results = (~
+        %p.hello(key={hi})
+      ~);",
+      "results = (<p className='hello' key={hi}></p>);"
 	end
+
+  def test_spaces
+    assert_render "
+      results = (~
+        %p.hello
+          hi
+          a
+      ~);",
+      "results = (<p className='hello'>hi{' '}a</p>);"
+
+    assert_render "
+      results = (~
+        %p.hello
+          hi
+          {a.length}
+          a
+      ~);",
+      "results = (<p className='hello'>hi{' '}{a.length}{' '}a</p>);"
+
+    assert_render "
+      results = (~
+        %p.hello
+          {a1}
+          {a2}
+          a
+      ~);",
+      "results = (<p className='hello'>{a1}{' '}{a2}{' '}a</p>);"
+  end
 
   def test_comments
     assert_render "
@@ -26,7 +61,7 @@ class EngineTests < Test::Unit::TestCase
           // test2
           hi
       ~);",
-      "results = (<p className='hello'>a\n  hi</p>);"
+      "results = (<p className='hello'>a{' '}hi</p>);"
   end
 
   def test_dots
