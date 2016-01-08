@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.description               = 'Inline Haml in JSX just like HTML, using (~ and ~) delimeters. Rather limited still.'
   s.authors                   = ['Dan Hassin']
   s.email                     = ['danhassin@mac.com']
-  s.homepage                  = 'http://rubygems.org/gems/hamljsx'
+  s.homepage                  = 'https://github.com/dingbat/hamljsx'
   s.licenses                  = ['license.md']
 
   s.files                     = ['lib/hamljsx.rb', 'lib/engine.rb']
