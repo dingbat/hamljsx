@@ -6,16 +6,14 @@ File extensions should be `.js.jsx.haml`.
 
 Use `{...}` to embed javascript into the HAML, just like JSX.
 
-## Example & notes
-
 ```javascript
 var section = ...
 var button = ...
 return (~
-  .(key={"section-"+section.id})
-    .section-box
+  .section-box(key={"section-"+section.id})
+    .section-button
       {button}
-      %SomeOtherClass(schedule={this.state.store.schedule})
+    %SomeOtherClass(schedule={this.state.store.schedule})
 ~);
 ```
 
@@ -28,7 +26,14 @@ return (~
 ### Optimizations
 
 * For dynamic classes, there's no need to use `className`, just use the `class` property: `%table(class={...})`.
-* Slight `div` optimization for HAML –– use `.` even when there is no class name, instead of having to use `%div`.
+* Slight `div` optimization for HAML –– use `.` even when there is no class name, instead of having to use `%div`:
+  
+  ```javascript
+  .
+    .one-div
+    .(class="two-div")
+  ```
+
 * The JSX spacing standard is made more consistent with the HAML standard, so that:
 
   ```javascript
