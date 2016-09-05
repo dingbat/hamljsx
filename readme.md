@@ -1,3 +1,5 @@
+## NOTE: Support has moved to the [haml-jsx webpack loader](https://github.com/dingbat/haml-jsx-loader). You should use it instead.
+
 # Haml :heart: JSX
 
 With this Rails gem you can inline HAML in JSX by putting it between the `(~` and `~)` delimeters.
